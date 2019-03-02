@@ -1,0 +1,15 @@
+sub macro()
+dim x as integer
+dim y as string
+dim ws as worksheet
+
+let y = "ass"
+set ws =activesheet
+
+last_row=ws.cells(rows.count,1).end(xlup).row
+
+for x = 1 to 10
+ws.cells(x,1).value="shit your ass"
+next x
+
+end sub
