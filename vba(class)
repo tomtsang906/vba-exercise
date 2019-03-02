@@ -1,0 +1,5 @@
+option explicit
+
+public x as string
+public y as integer
+
