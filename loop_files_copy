@@ -1,0 +1,37 @@
+Option Explicit
+
+Sub macro()
+
+'定義一下不同variable的data type
+Dim v As Workbook
+Dim x As Integer
+Dim y As Variant
+Dim z As String
+
+'令y指向於c files的my projects
+y = Dir("C:\Users\USER\Documents\my projects\excel")
+
+'如有錯誤，亦要繼續
+On Error Resume Next
+
+'要計哂所有的file
+y.v.Count
+
+
+y.v.Select
+
+Selection.Open
+
+last__row = Selection.Cells(Rows.Count).End(xlUp).Row
+
+For x = 1 To last_row
+
+v.Add.Name = "ass"
+
+v.Worksheets.Copy
+
+
+
+
+
+End Sub
