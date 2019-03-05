@@ -5,13 +5,16 @@ Sheets(1).Select '選擇一張紙
 Worksheets.Add '加多一張紙
 Sheets(1).Name = "Combined" '把一張紙命名為"combined"
 Sheets(2).Activate '啟動紙(2)
-Range("A1").EntireRow.Select 
-Selection.Copy Destination:=Sheets(1).Range("A1")
+Range("A1").EntireRow.Select '選擇由range"A1"到文本最尾的範圍
+Selection.Copy Destination:=Sheets(1).Range("A1") '複製選取的範圍，並複製到指定的位置:=工作紙(1)的range("a1")
+'loop 迴環 介定範圍-由第2張到所有的紙 
 For J = 2 To Sheets.Count
-Sheets(J).Activate
-Range("A1").Select
-Selection.CurrentRegion.Select
-Selection.Offset(1, 0).Resize(Selection.Rows.Count - 1).Select
+Sheets(J).Activate '啟動所有的工作紙
+Range("A1").Select '選擇格仔(a1)
+Selection.CurrentRegion.Select '選擇已選的範圍 currentRegion????
+'
+Selection.Offset(1, 0).Resize(Selection.Rows.Count - 1).Select 
+'將所選取的範圍拷貝目的地為工作紙(1)
 Selection.Copy Destination:=Sheets(1).Range("A65536").End(xlUp)(2)
-Next
-End Sub
+Next 'jump出迴圈
+End Sub '完結
