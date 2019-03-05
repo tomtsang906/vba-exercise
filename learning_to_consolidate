@@ -1,0 +1,17 @@
+Sub Combine() '標題 合併
+Dim J As Integer '定義j為整數
+On Error Resume Next '如有錯，亦要繼續
+Sheets(1).Select '選擇一張紙
+Worksheets.Add '加多一張紙
+Sheets(1).Name = "Combined" '把一張紙命名為"combined"
+Sheets(2).Activate '啟動紙(2)
+Range("A1").EntireRow.Select 
+Selection.Copy Destination:=Sheets(1).Range("A1")
+For J = 2 To Sheets.Count
+Sheets(J).Activate
+Range("A1").Select
+Selection.CurrentRegion.Select
+Selection.Offset(1, 0).Resize(Selection.Rows.Count - 1).Select
+Selection.Copy Destination:=Sheets(1).Range("A65536").End(xlUp)(2)
+Next
+End Sub
