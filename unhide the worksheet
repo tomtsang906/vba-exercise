@@ -1,0 +1,32 @@
+Sub Prepare_file_for_review_for_MA_2()
+
+Dim sh As Worksheet
+Dim v As Variant
+v = Array("TOS", "TOS Email Language", "Buyer Analysis", "CTOS Calc", "Lists")
+Dim x As Integer
+'先介定各資料的種類
+'後作判斷-如果"TOS A"能透明 .visible = true 之後
+'介定x的範圍-從零至到最尾(ubound)
+If Sheets("TOS A").Visible = True Then
+For x = 0 To UBound(v)
+'工作紙(v(從0至最尾))的透明 = 關掉
+Sheets(v(x)).Visible = False
+Next
+For Each sh In Sheets
+If sh.Name Like "ss_*" Or sh.Name Like "SSR*" Then sh.Visible = False
+Next
+MsgBox "Tabs unnecessary for review & approval have been hidden."
+Exit Sub
+End If
+'
+If Sheets("TOS A").Visible  = False Then
+For x = 0 To UBound(v)
+Sheets(v(x)).Visible = True
+Next
+For Each sh In Sheets
+If sh.Name Like "ss_*" Or sh.Name Like "SSR*" Then sh.Visible = True
+Next
+MsgBox "Tabs previously hidden for review & approval have been unhidden."
+End If
+End Sub
+
