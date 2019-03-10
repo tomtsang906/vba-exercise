@@ -1,0 +1,62 @@
+'任務：合并所有報表
+Sub macro()
+
+'介定各變數之資料結構
+'似煮野的原材料
+Dim ws As Worksheet
+Dim x As Integer
+Dim y As String, h As String, v As String
+Dim z As Variant
+
+Set wb = ThisWorkbook
+Set ws = ActiveSheet
+
+Let y = "my ass"
+Let h = "shit"
+Let v = "how can you tolerate this shit?"
+
+'演算法
+'煮食的程序
+
+'一，先寫出由1至10的儲存格的值，以作資料
+For x = 1 To 10
+  ActiveSheet.Cells(x, 1).Value = y
+Next x
+
+'二，再加第二張紙，
+wb.Sheets.Add.Name = "you shit"
+
+'並賦予第二行的1至10的值
+For x = 1 To 10
+    Sheets("you shit").Cells(x, 2).Value = h
+Next x
+
+'三，再加多第三張紙，
+wb.Sheets.Add.Name = "damn you"
+
+'賦予第三行的1至10的值
+For x = 1 To 10
+    Sheets("damn you").Cells(x, 3).Value = v
+Next x
+
+'四，合井報表
+
+'先加一張紙，名為"consolidated"
+wb.Sheets.Add.Name = "consolidated"
+
+'數全部的工作紙
+ws_count = Application.wb.ws.Count
+
+'在全部的工作紙中，設下條件：=所有的工作表-consolidated=真正要覆製的資枓
+For i = 1 To ws_count
+
+    If ws_count <> Sheets("consolidated") Then
+    
+    Worksheets(i).Copy PasteSpecial:=Sheets("consolidated")
+    
+    End If
+    
+    Next
+    
+'完成任務
+End Sub
