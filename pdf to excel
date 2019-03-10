@@ -1,0 +1,69 @@
+'任務：將excel轉換至pdf
+'程序：先界定資料結構 (設定架步，後容易進行演算)
+      '後作演算法
+      '演算法：(一)，設定/寻找file的路徑
+      '二，打開PDF
+      '三，抽出PDF的頁數
+      '四，選取第一個cell
+      '五，開啟PDF
+      '六，循迴所有的PDF頁數
+Private Sub CommandButton1_Click()
+ 'Declare Variable(s)
+Dim appAA As Acrobat.CAcroApp, docPDF As Acrobat.CAcroPDDoc
+Dim strFileName As String, intNOP As Integer, arrI As Variant
+Dim intC As Integer, intR As Integer, intBeg As Integer, intEnd As Integer
+
+'Initialize Variables
+Set appAA = CreateObject("AcroExch.App"): Set docPDF = CreateObject("AcroExch.PDDoc")
+
+'Set PDF FileName  
+strFileName = "C:\Documents and Settings\Michael Palkovitz\My Documents\Test\EC Operations Budget February FY13.pdf"
+
+'Read PDF File
+docPDF.Open (strFileName)
+
+'Extract Number of Pages From PDF File
+intNOP = docPDF.GetNumPages
+
+'Select First Data Cell
+Range("A1").Select
+
+'Open PDF File
+ActiveWorkbook.FollowHyperlink strFileName, , True
+
+'Loop Through All PDF File Pages
+For intC = 1 To intNOP
+'Go To Page Number
+SendKeys ("+^n" & intC & "{ENTER}")
+
+'Select All Data In The PDF File's Active Page
+SendKeys ("^a"), True
+
+'Right-Click Mouse
+SendKeys ("+{F10}"), True
+
+'Copy Data As Table
+SendKeys ("c"), True
+
+'Minimize Adobe Window
+SendKeys ("%n"), True
+
+'Paste Data In This Workbook's Worksheet
+ActiveSheet.Paste
+
+'Select Next Paste Cell
+Range("A" & Range("A1").SpecialCells(xlLastCell).Row + 2).Select
+
+'Maximize Adobe Window
+SendKeys ("%x")
+Next intC
+
+'Close Adobe File and Window
+SendKeys ("^w"), True
+
+'Empty Object Variables
+Set appAA = Nothing: Set docPDF = Nothing
+
+'Select First Cell
+Range("A1").Select
+end sub
